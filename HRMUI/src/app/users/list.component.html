@@ -1,0 +1,132 @@
+
+<div  style="width: 100%; height: 100%; margin-top: 200px ; margin-left: 200px" *ngIf = "!users">
+    <div class="row" *ngIf="!users">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+            <mat-spinner></mat-spinner>
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+ </div> 
+<mat-drawer-container class="example-container" *ngIf = "users">
+  <mat-drawer #drawer mode="side" class="example-sidenav" opened>
+            <nav id="sidebar">
+                <nav id="sidebar">
+                    <div class="sidebar-header">
+                        <h3>Danh sách nhân viên</h3>
+                    </div>
+                    <ul class="list-unstyled components">
+                        <p>Dummy Heading</p>
+                        <li class="active">
+                            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"
+                                class="dropdown-toggle">Home</a>
+                            <ul class="collapse list-unstyled" id="homeSubmenu">
+                                <li>
+                                    <a href="#">Home 1</a>
+                                </li>
+                                <li>
+                                    <a href="#">Home 2</a>
+                                </li>
+                                <li>
+                                    <a href="#">Home 3</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">About</a>
+                        </li>
+                        <li>
+                            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false"
+                                class="dropdown-toggle">Pages</a>
+                            <ul class="collapse list-unstyled" id="pageSubmenu">
+                                <li>
+                                    <a href="#">Page 1</a>
+                                </li>
+                                <li>
+                                    <a href="#">Page 2</a>
+                                </li>
+                                <li>
+                                    <a href="#">Page 3</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Portfolio</a>
+                        </li>
+                        <li>
+                            <a href="#">Contact</a>
+                        </li>
+                    </ul>
+                </nav>
+            </nav>
+  </mat-drawer>
+  <mat-drawer-content>
+   <!-- Page Content -->
+     <div class="container-fluid">
+                        <button type="button" mat-button (click)="drawer.toggle()">
+                            <i class="fas fa-align-left"></i>
+                            <span>ẨN</span>
+                        </button>
+                    </div>
+            <div class="container">
+                <h1>List Employee</h1>
+                <ngx-datatable class="material" [rows]="users" [columnMode]="'force'" [headerHeight]="50"
+                    [footerHeight]="50" [rowHeight]="100" [scrollbarV]="false" >
+                    <ngx-datatable-column name="User ID">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.userID}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="First Name">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.firstname}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Last Name">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.lastname}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Email">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.email}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="avatar">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.avatar}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Age">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.age}}
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Gender">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <p *ngIf="row.gender == 0"> Nam</p>
+                            <p *ngIf="row.gender == 1"> N?</p>
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column name="Phone">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.phone}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                </ngx-datatable>
+            </div>
+  </mat-drawer-content>
+</mat-drawer-container>
+
+        <!-- Sidebar -->
+
+       
