@@ -1,0 +1,83 @@
+<div style="width: 100%; height: 100%; margin-top: 200px ; margin-left: 200px" *ngIf="!data">
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+            <mat-spinner></mat-spinner>
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+</div>
+<div class="container" *ngIf="data">
+    <h1 style="color: gray;">List Employee</h1>
+    <ngx-datatable  #myTable class="material" [rows]="data" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+        [rowHeight]="100" [scrollbarV]="false">
+        <ngx-datatable-column name="User ID">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.userID}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="First Name">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.firstname}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Last Name">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.lastname}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Email">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.email}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="avatar">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.avatar}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Age">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.age}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Gender">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                <p *ngIf="row.gender == 0"> Nam</p>
+                <p *ngIf="row.gender == 1"> Nữ</p>
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Phone">
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.phone}}
+            </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-footer>
+            <ng-template ngx-datatable-footer-template let-rowCount="20" let-pageSize="2" let-curPage="curPage"
+                let-selectedCount="20"  let-offset="offset" let-isVisible="isVisible">
+                <div class="page-count">
+                    <!-- <span *ngIf="selectedMessage">
+                        {{selectedCount.toLocaleString()}} {{selectedMessage}} /
+                    </span>
+                    {{rowCount.toLocaleString()}} {{totalMessage}} -->
+                </div>
+                <datatable-pager [pagerLeftArrowIcon]="'datatable-icon-left'"
+                    [pagerRightArrowIcon]="'datatable-icon-right'" [pagerPreviousIcon]="'datatable-icon-prev'"
+                    [pagerNextIcon]="'datatable-icon-skip'" [page]="curPage" [size]="7" [count]="20"
+                    [hidden]="!((20 / 2) > 1)">
+                </datatable-pager>
+            </ng-template>
+        </ngx-datatable-footer>
+    </ngx-datatable>
+
+</div>

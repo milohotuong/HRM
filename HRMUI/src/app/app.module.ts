@@ -17,6 +17,8 @@ import { ListComponent } from './users/list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { listEmployeeComponent } from './users/listEmployee.component';
+import { listEmployeeQuittedComponent } from './users/listEmployeeQuitted.component'
 
 @NgModule({
     imports: [
@@ -33,7 +35,9 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
         AlertComponent,
         HomeComponent,
         LoginComponent,
-        ListComponent
+        ListComponent,
+        listEmployeeComponent,
+        listEmployeeQuittedComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
