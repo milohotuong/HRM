@@ -81,7 +81,12 @@ export class AccountService {
             }));
     }
 
-    
+    getNumberOfProfile(){
+        return this.http.get<number>(`${environment.apiUrl}/profile/getNumberOfProfiles`).pipe(map(x =>{
+            return x;
+        }))
+    }
+
 
     // delete(id: number) {
     //     return this.http.delete(`${environment.apiUrl}/users/${id}`)
