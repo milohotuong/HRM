@@ -5,7 +5,7 @@ import { HttpParams, HttpClient } from '@angular/common/http';
 import { AccountService } from '../services/account.service';
 
 @Component({templateUrl: './list.component.html',  selector: 'users'})
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit{
 
     // displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
     users = null;
@@ -46,6 +46,7 @@ export class ListComponent implements OnInit {
 
     changeTab(tabIndex: number) {
         console.log("vào cho bố");
+        this.tabIndex = 2;
         this.tabIndex = tabIndex;
     }
 
