@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { HttpParams, HttpClient } from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 import { AccountService } from '../services/account.service';
 
@@ -45,10 +46,6 @@ export class ListComponent implements OnInit{
     }
 
     changeTab(tabIndex: number) {
-        console.log("vào cho bố");
-        this.tabIndex = 2;
         this.tabIndex = tabIndex;
     }
-
-
 }

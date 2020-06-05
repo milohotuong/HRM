@@ -1,22 +1,246 @@
+html,
+body {
+  height: 100%;
+}
 
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .wrapper {
-    align-items: stretch;
+  align-items: stretch;
+}
+
+p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1em;
+  font-weight: 300;
+  line-height: 1.7em;
+  color: #999;
 }
 
 #sidebar {
-    min-width: 250px;
-    max-width: 250px;
+  min-width: 250px;
+  max-width: 250px;
+  height: 100%;
+  background: #7386D5;
+  color: #fff;
+}
+
+#sidebar .sidebar-header {
+  padding: 20px;
+  background: #6d7fcc;
+  color: #ffc107;
+  font-size: large;
+}
+
+#sidebar ul.components {
+  padding: 20px 0;
+  border-bottom: 1px solid #47748b;
+}
+
+#sidebar ul p {
+  color: #fff;
+  padding: 10px;
+}
+
+#sidebar ul li a {
+  padding: 10px;
+  font-size: 1.1em;
+  display: block;
+  color: #2b2a26;
+}
+
+#sidebar ul li a:hover {
+  color: #7386D5;
+  background: #fff;
+}
+
+a,
+a:hover,
+a:focus {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+#sidebar ul li.active>a,
+a[aria-expanded="true"] {
+  color: #fff;
+  background: #6d7fcc;
+}
+
+ul ul a {
+  font-size: 0.9em !important;
+  padding-left: 30px !important;
+  background: #6d7fcc;
 }
 
 #sidebar.active {
-    margin-left: -250px;
+  margin-left: -250px;
 }
 
 .example-container {
-  height: 100%;  
+  height: 100%;
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.5);
 }
+
+.emp-profile {
+  padding: 3%;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  border-radius: 0.5rem;
+  background: #fff;
+}
+
+.profile-img {
+  text-align: center;
+}
+
+.profile-img img {
+  width: 70%;
+  height: 100%;
+}
+
+.profile-img .file {
+  position: relative;
+  overflow: hidden;
+  margin-top: -20%;
+  width: 70%;
+  border: none;
+  border-radius: 0;
+  font-size: 15px;
+  background: #212529b8;
+}
+
+.profile-img .file input {
+  position: absolute;
+  opacity: 0;
+  right: 0;
+  top: 0;
+}
+
+.profile-head h5 {
+  color: #333;
+}
+
+.profile-head h6 {
+  color: #0062cc;
+}
+
+.profile-edit-btn {
+  border: none;
+  border-radius: 1.5rem;
+  width: 70%;
+  padding: 2%;
+  font-weight: 600;
+  color: #6c757d;
+  cursor: pointer;
+}
+
+.proile-rating {
+  font-size: 12px;
+  color: #818182;
+  margin-top: 5%;
+}
+
+.proile-rating span {
+  color: #495057;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.profile-head .nav-tabs {
+  margin-bottom: 5%;
+}
+
+.profile-head .nav-tabs .nav-link {
+  font-weight: 600;
+  border: none;
+}
+
+.profile-head .nav-tabs .nav-link.active {
+  border: none;
+  border-bottom: 2px solid #0062cc;
+}
+
+.profile-work {
+  padding: 14%;
+  margin-top: -15%;
+}
+
+.profile-work p {
+  font-size: 12px;
+  color: #818182;
+  font-weight: 600;
+  margin-top: 10%;
+}
+
+.profile-work a {
+  text-decoration: none;
+  color: #495057;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.profile-work ul {
+  list-style: none;
+}
+
+.profile-tab label {
+  font-weight: 600;
+  color: #0062cc;
+}
+
+.profile-tab p {
+  font-weight: 600;
+  color: #0062cc;
+}
+
+#addEditForm div {
+  color: black;
+}
+
+.input-group-addon {
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  color: #555;
+  text-align: center;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 4px
+}
+
+#addEditForm #input-group {
+  margin: 10px;
+  position: relative;
+  display: table;
+  border-collapse: separate;
+}
+
+.avatar {
+  padding: .25rem;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: .25rem;
+  max-width: 100%;
+  height: auto;
+  max-block-size: 80px;
+  margin-top: -10px;
+}
+
+#linktabaaa a{
+  color: blue;
+  font-style: italic;
+}
+
+#linktabaaa a:hover {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+

@@ -4,7 +4,7 @@ import { HttpParams, HttpClient } from '@angular/common/http';
 import { AccountService } from '../services/account.service';
 
 @Component({templateUrl: './listEmployeeQuitted.component.html',  selector: 'listEmployeeQuitted'})
-export class listEmployeeQuittedComponent implements OnInit {
+export class ListEmployeeQuittedComponent implements OnInit {
 
     // displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
     users = null;

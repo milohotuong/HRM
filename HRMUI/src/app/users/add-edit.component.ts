@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { AccountService} from '../services/account.service';
+import { AccountService } from '../services/account.service';
 import { AlertService } from '../services/alert.service'
 
 @Component({ templateUrl: './add-edit-component.html' })
@@ -20,7 +20,7 @@ export class AddEditComponent implements OnInit {
         private router: Router,
         private accountService: AccountService,
         private alertService: AlertService
-    ) {}
+    ) { }
 
     ngOnInit() {
         this.id = this.route.snapshot.params['id'];
@@ -97,5 +97,9 @@ export class AddEditComponent implements OnInit {
                     this.alertService.error(error);
                     this.loading = false;
                 });
+    }
+
+    sumitData() {
+        
     }
 }

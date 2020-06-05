@@ -6,20 +6,23 @@ import { AccountService } from '../services/account.service';
 import { EmployeeDetail } from '../models/employeeDetail';
 
 @Component({ templateUrl: './employeeDetail.component.html', selector: 'employeeDetailComponent' })
-export class employeeDetailComponent implements OnInit {
+export class EmployeeDetailComponent implements OnInit {
     // displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
     users = null;
     displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
     tabIndex: number;
-
+    isActiveAddEditEmployee: boolean;
+    isLoading: boolean;
+    data = null;
     constructor(private accountService: AccountService) { }
 
     @Input()
     employeeDetail: EmployeeDetail;
 
     ngOnInit() {
+        this.isActiveAddEditEmployee = false;
         this.tabIndex = 1;
-        console.log("ahihihi" + this.employeeDetail.email);
+        this.loadData();
     }
 
     deleteUser(id: string) {
@@ -28,8 +31,32 @@ export class employeeDetailComponent implements OnInit {
 
     }
 
-    changeTab(tabIndex: number) {
-        console.log("vào cho bố");
-        this.tabIndex = tabIndex;
+    activeAddEdit() {
+        console.log("vao day em oi");
+        this.isActiveAddEditEmployee = !this.isActiveAddEditEmployee;
+    }
+
+    loadData() {
+        this.isLoading = true;
+        let params = new HttpParams();
+        console.log(this.employeeDetail.userID);
+        params.append('userId', '' + this.employeeDetail.userID);
+         console.log(params);
+        this.accountService.getProfileDetail(this.employeeDetail.userID).pipe(first()).subscribe(
+            data => {
+                this.data = data;
+                console.log (data);
+                this.isLoading = false;
+            },
+            error => {
+                console.log('như lồn');
+                this.isLoading = false;
+            }
+        )
+    }
+
+    reload() {
+        this.isActiveAddEditEmployee = false;
+        this.loadData();
     }
 }

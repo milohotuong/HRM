@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 import { User } from '../models/user';
+import { EmployeeDetail } from '../models/employeeDetail'
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -48,9 +49,9 @@ export class AccountService {
     }
 
     getAll(params) {
-        return this.http.get(`${environment.apiUrl}/profile/getAll`, {params: params}).pipe(map(x => {
-                return x;
-            }));
+        return this.http.get(`${environment.apiUrl}/profile/getAll`, { params: params }).pipe(map(x => {
+            return x;
+        }));
     }
 
     getById(id: string) {
@@ -73,16 +74,22 @@ export class AccountService {
             }));
     }
 
-    add(username, password , department: number){
-          return this.http.post(`${environment.apiUrl}/add`, { username, password, department })
+    add(username, password, department: number) {
+        return this.http.post(`${environment.apiUrl}/add`, { username, password, department })
             .pipe(map(x => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 return x;
             }));
     }
 
-    getNumberOfProfile(){
-        return this.http.get<number>(`${environment.apiUrl}/profile/getNumberOfProfiles`).pipe(map(x =>{
+    getNumberOfProfile() {
+        return this.http.get<number>(`${environment.apiUrl}/profile/getNumberOfProfiles`).pipe(map(x => {
+            return x;
+        }))
+    }
+
+    getProfileDetail(userId) {
+        return this.http.get(`${environment.apiUrl}/profile/getProfileDetail?userId=${userId}`).pipe(map(x => {
             return x;
         }))
     }

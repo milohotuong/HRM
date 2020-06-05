@@ -8,12 +8,12 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
 
 import { ViewChild } from '@angular/core';
 
-import {EmployeeDetail} from '../models/employeeDetail';
+import { EmployeeDetail } from '../models/employeeDetail';
 
 
 
-@Component({ templateUrl: './listEmployee.component.html', selector: 'listEmployee'})
-export class listEmployeeComponent implements OnInit {
+@Component({ templateUrl: './listEmployee.component.html', selector: 'listEmployee' })
+export class ListEmployeeComponent implements OnInit {
 
     // displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
     data = null;
@@ -43,15 +43,15 @@ export class listEmployeeComponent implements OnInit {
         this.isLoading = true;
         this.currentPage = curPage;
         let params = new HttpParams();
-        if (this.firstLoad){
+        if (this.firstLoad) {
             this.accountService.getNumberOfProfile().pipe(first()).subscribe(
                 data => {
                     this.totalElements = data;
-                    console.log ('rowCount' + this.rowCount);
+                    console.log('rowCount' + this.rowCount);
                     this.firstLoad = false;
                 },
                 error => {
-                     console.log('như lồn');
+                    console.log('như lồn');
                 }
             )
         }
@@ -84,26 +84,32 @@ export class listEmployeeComponent implements OnInit {
         //     });
     }
 
-    onChange(event: any){
+    onChange(event: any) {
         console.log("con cac");
         this.currentPage = event.page;
         this.loadtable(this.currentPage, this.pageSizes, this.sortBy, false);
     }
 
-    setPage(event: any){
-        console.log ("cai lon");
+    setPage(event: any) {
+        console.log("cai lon");
     }
 
-    onFooterPage(event: any){
+    onFooterPage(event: any) {
         console.log("dit me may");
         // this.curPage = event.curPage;
     }
 
     onActivate(event) {
-    if (event.type === 'click') {
-        this.selectedRow = event.row;
-        console.log(this.selectedRow);
-        this.isActiveDetail = true;
+        if (event.type === 'click') {
+            this.selectedRow = event.row;
+            console.log(this.selectedRow);
+            this.isActiveDetail = true;
+        }
     }
-}
+
+    reload() {
+        this.isActiveDetail = false;
+        this.loadtable(1, this.pageSizes, 'userId', true);
+    }
+
 }

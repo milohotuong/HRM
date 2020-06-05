@@ -10,76 +10,81 @@
     </div>
 </div>
 <div class="container">
-    <div *ngIf="!isLoading && !this.isActiveDetail">
-    <h1 style="color: gray;">List Employee</h1>
-    <ngx-datatable  #myTable class="material" [rows]="data" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
-        [rowHeight]="50" [scrollbarV]="false" (activate)="onActivate($event)">
-        <ngx-datatable-column name="User ID">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                <a>{{row.userID}}</a>
-            </ng-template>
-        </ngx-datatable-column>
+            <span id="linktabaaa" *ngIf="!isLoading">
+            <a (click)="reload()">
+            Danh sách nhân viên</a></span> 
+            <div *ngIf="!isLoading && !this.isActiveDetail">
+                <ngx-datatable #myTable class="material" [rows]="data" [columnMode]="'force'" [headerHeight]="50"
+                    [footerHeight]="50" [rowHeight]="70" [scrollbarV]="false" (activate)="onActivate($event)">
+                    <ngx-datatable-column name="User ID">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <a>{{row.userID}}</a>
+                        </ng-template>
+                    </ngx-datatable-column>
 
-        <ngx-datatable-column name="First Name">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.firstname}}
-            </ng-template>
-        </ngx-datatable-column>
+                    <ngx-datatable-column name="First Name">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.firstname}}
+                        </ng-template>
+                    </ngx-datatable-column>
 
-        <ngx-datatable-column name="Last Name">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.lastname}}
-            </ng-template>
-        </ngx-datatable-column>
+                    <ngx-datatable-column name="Last Name">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.lastname}}
+                        </ng-template>
+                    </ngx-datatable-column>
 
-        <ngx-datatable-column name="Email" [width] = "200">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.email}}
-            </ng-template>
-        </ngx-datatable-column>
+                    <ngx-datatable-column name="Email" [width]="200">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.email}}
+                        </ng-template>
+                    </ngx-datatable-column>
 
-        <ngx-datatable-column name="avatar">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.avatar}}
-            </ng-template>
-        </ngx-datatable-column>
+                    <ngx-datatable-column name="avatar">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.avatar}}
+                        </ng-template>
+                    </ngx-datatable-column>
 
-        <ngx-datatable-column name="Age">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.age}}
-            </ng-template>
-        </ngx-datatable-column>
+                    <ngx-datatable-column name="Age">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.age}}
+                        </ng-template>
+                    </ngx-datatable-column>
 
-        <ngx-datatable-column name="Gender">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                <p *ngIf="row.gender == 0"> Nam</p>
-                <p *ngIf="row.gender == 1"> Nữ</p>
-            </ng-template>
-        </ngx-datatable-column>
+                    <ngx-datatable-column name="Gender">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <p *ngIf="row.gender == 0"> Nam</p>
+                            <p *ngIf="row.gender == 1"> Nữ</p>
+                        </ng-template>
+                    </ngx-datatable-column>
 
-        <ngx-datatable-column name="Phone">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.phone}}
-            </ng-template>
-        </ngx-datatable-column>
+                    <ngx-datatable-column name="Phone">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            {{row.phone}}
+                        </ng-template>
+                    </ngx-datatable-column>
 
-        <ngx-datatable-column name="">
-            <ng-template let-row="row" ngx-datatable-cell-template>
-                {{row.phone}}
-            </ng-template>
-        </ngx-datatable-column>
+                    <ngx-datatable-column name="Ảnh" class="pictureRow">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <img src="https://gamek.mediacdn.vn/thumb_w/690/2019/7/4/3-1562256059926859483623.jpg"
+                                class="avatar">
+                        </ng-template>
+                    </ngx-datatable-column>
 
-        <ngx-datatable-footer>
-            <ng-template ngx-datatable-footer-template let-rowCount="this.totalElements" let-pageSize="pageSize" let-curPage="curPage"
-                 let-offset="offset" let-isVisible="isVisible">
-                <datatable-pager [pagerLeftArrowIcon]="'datatable-icon-left'"
-                    [pagerRightArrowIcon]="'datatable-icon-right'" [pagerPreviousIcon]="'datatable-icon-prev'"
-                    [pagerNextIcon]="'datatable-icon-skip'" [page]="this.currentPage" [size]="this.pageSizes" [count]="this.totalElements"
-                    [hidden]="!((this.totalElements/this.pageSize) > 1)" (change) = "onChange($event)">
-                </datatable-pager>
-            </ng-template>
-        </ngx-datatable-footer>
-    </ngx-datatable>
-    </div>
-    <employeeDetailComponent *ngIf="!isLoading && this.isActiveDetail" [employeeDetail] = "this.selectedRow"></employeeDetailComponent>
+                    <ngx-datatable-footer>
+                        <ng-template ngx-datatable-footer-template let-rowCount="this.totalElements"
+                            let-pageSize="pageSize" let-curPage="curPage" let-offset="offset" let-isVisible="isVisible">
+                            <datatable-pager [pagerLeftArrowIcon]="'datatable-icon-left'"
+                                [pagerRightArrowIcon]="'datatable-icon-right'"
+                                [pagerPreviousIcon]="'datatable-icon-prev'" [pagerNextIcon]="'datatable-icon-skip'"
+                                [page]="this.currentPage" [size]="this.pageSizes" [count]="this.totalElements"
+                                [hidden]="!((this.totalElements/this.pageSize) > 1)" (change)="onChange($event)">
+                            </datatable-pager>
+                        </ng-template>
+                    </ngx-datatable-footer>
+                </ngx-datatable>
+</div>
+<employeeDetailComponent *ngIf="!isLoading && this.isActiveDetail" [employeeDetail]="this.selectedRow">
+</employeeDetailComponent>
 </div>
