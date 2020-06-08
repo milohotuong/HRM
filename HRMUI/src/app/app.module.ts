@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 // used to create fake backend
 import { fakeBackendProvider } from './helpers/fake-backend';
@@ -30,7 +31,8 @@ import { AddEditEmployeeComponent } from './users/addEditEmployee.component';
         AppRoutingModule,
         BrowserAnimationsModule,
         MaterialModule,
-        NgxDatatableModule
+        NgxDatatableModule,
+        FormsModule
     ],
     declarations: [
         AppComponent,

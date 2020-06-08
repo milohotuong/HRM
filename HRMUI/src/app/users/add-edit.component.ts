@@ -13,6 +13,7 @@ export class AddEditComponent implements OnInit {
     isAddMode: boolean;
     loading = false;
     submitted = false;
+    data = null;
 
     constructor(
         private formBuilder: FormBuilder,

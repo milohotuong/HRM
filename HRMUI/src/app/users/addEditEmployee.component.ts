@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
@@ -7,6 +7,7 @@ import { AccountService } from '../services/account.service';
 import { AlertService } from '../services/alert.service';
 import { UploadFileService } from '../services/uploadFile.service';
 import { HttpParams } from '@angular/common/http';
+import { EmployeeDetail } from '../models/employeeDetail';
 
 @Component({ templateUrl: './addEditEmployee.component.html', selector: 'addEditEmployee' })
 export class AddEditEmployeeComponent implements OnInit {
@@ -16,6 +17,13 @@ export class AddEditEmployeeComponent implements OnInit {
     isLoading: boolean;
     submitted = false;
     fileImage: File;
+    data: any;
+    rootdata: any;
+    differ: any;
+    haschange: boolean;
+    error: boolean
+    @Input()
+    employeeDetail: EmployeeDetail;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -27,99 +35,32 @@ export class AddEditEmployeeComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.id = this.route.snapshot.params['id'];
-        this.isAddMode = !this.id;
-        // password not required in edit mode
-        const passwordValidators = [Validators.minLength(6)];
-        if (this.isAddMode) {
-            passwordValidators.push(Validators.required);
-        }
-
-        this.form = this.formBuilder.group({
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
-            username: ['', Validators.required],
-            password: ['', passwordValidators]
-        });
-
-        if (!this.isAddMode) {
-            this.accountService.getById(this.id)
-                .pipe(first())
-                .subscribe(x => {
-                    // this.f.firstName.setValue(x.firstName);
-                    // this.f.lastName.setValue(x.lastName);
-                    // this.f.username.setValue(x.username);
-                });
-        }
+        this.haschange = true;
+        this.error = null;
+        this.loadData();
     }
 
-    // // convenience getter for easy access to form fields
-    // get f() { return this.form.controls; }
-
-    // onSubmit() {
-    //     this.submitted = true;
-
-    //     // reset alerts on submit
-    //     this.alertService.clear();
-
-    //     // stop here if form is invalid
-    //     if (this.form.invalid) {
-    //         return;
-    //     }
-
-    //     this.loading = true;
-    //     if (this.isAddMode) {
-    //         this.createUser();
-    //     } else {
-    //         this.updateUser();
-    //     }
-    // }
-
-    // private createUser() {
-    //     this.accountService.register(this.form.value)
-    //         .pipe(first())
-    //         .subscribe(
-    //             data => {
-    //                 this.alertService.success('User added successfully', { keepAfterRouteChange: true });
-    //                 this.router.navigate(['.', { relativeTo: this.route }]);
-    //             },
-    //             error => {
-    //                 this.alertService.error(error);
-    //                 this.loading = false;
-    //             });
-    // }
-
-    // private updateUser() {
-    //     this.accountService.update(this.id, this.form.value)
-    //         .pipe(first())
-    //         .subscribe(
-    //             data => {
-    //                 this.alertService.success('Update successful', { keepAfterRouteChange: true });
-    //                 this.router.navigate(['..', { relativeTo: this.route }]);
-    //             },
-    //             error => {
-    //                 this.alertService.error(error);
-    //                 this.loading = false;
-    //             });
-    // }
 
     handleFileInput(files: FileList) {
         console.log("nhận file");
         this.fileImage = files.item(0);
     }
 
-        loadData() {
+    loadData() {
         this.isLoading = true;
         let params = new HttpParams();
         console.log(this.employeeDetail.userID);
         params.append('userId', '' + this.employeeDetail.userID);
-         console.log(params);
+        console.log(params);
         this.accountService.getProfileDetail(this.employeeDetail.userID).pipe(first()).subscribe(
             data => {
-                console.log (data);
+                console.log(data);
+                this.rootdata = Object.assign({}, data);
+                this.data = data;
                 this.isLoading = false;
             },
             error => {
+                this.error = error;
                 console.log('như lồn');
                 this.isLoading = false;
             }
@@ -136,8 +77,29 @@ export class AddEditEmployeeComponent implements OnInit {
                     console.log(data)
                 },
                 error => {
+                    this.error = error;
                     this.alertService.error(error);
                     this.isLoading = false;
                 });
+    }
+
+    handleClick(value: number) {
+        console.log("vào handle");
+        this.data.gender = value;
+    }
+
+    hasDataChange() {
+        console.log(this.data);
+        console.log(this.rootdata);
+        console.log("dmmmmmmmmmm");
+        if (JSON.stringify(this.data) !== JSON.stringify(this.rootdata)) {
+            this.haschange = true;
+        }
+        else this.haschange = false;
+    }
+
+    revertData() {
+        this.data = Object.assign({}, this.rootdata);
+        this.haschange = true;
     }
 }

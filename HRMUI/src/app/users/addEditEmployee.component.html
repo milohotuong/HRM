@@ -1,6 +1,7 @@
-    <span id="linktabaaa" >
-        <a>>>Chỉnh sửa thông tin nhân viên</a></span>
-<div class="container" style="margin-top: 10px">
+<span id="linktabaaa">
+  <a>>>Chỉnh sửa thông tin nhân viên</a></span>
+<div class="container" style="margin-top: 10px" *ngIf="this.data">
+  <p class="text-danger" *ngIf="this.error" [textContent]="this.error"></p>
   <div class="row">
     <div class="col-md-10 " id="addEditForm">
       <legend style="color: darkblue;">Chỉnh sửa thông tin nhân viên</legend>
@@ -12,7 +13,9 @@
               <i class="fa fa-user">
               </i>
             </div>
-            <input id="Name (Full name)" name="Name (Full name)" type="text" placeholder="Name (Full name)"
+            <input id="Họ" name="Họ" type="text" placeholder="Họ" [(ngModel)]="this.data.firstname"
+              class="form-control input-md">
+            <input id="tên" name="tên" type="text" placeholder="Tên" [(ngModel)]="this.data.lastname"
               class="form-control input-md">
           </div>
         </div>
@@ -21,7 +24,8 @@
       <div class="form-group row">
         <label class="col-md-4 control-label" for="Upload photo">Ảnh</label>
         <div class="col-md-4">
-          <input id="Upload photo" name="Upload photo" class="input-file" type="file" (change)="handleFileInput($event.target.files)">
+          <input id="Upload photo" name="Upload photo" class="input-file" type="file"
+            (change)="handleFileInput($event.target.files)">
         </div>
       </div>
 
@@ -36,7 +40,7 @@
 
             </div>
             <input id="Date Of Birth" name="Date Of Birth" type="text" placeholder="Date Of Birth"
-              class="form-control input-md">
+              class="form-control input-md" [(ngModel)]="this.data.age">
           </div>
 
 
@@ -45,19 +49,17 @@
 
       <!-- Multiple Radios (inline) -->
       <div class="form-group row">
-        <label class="col-md-4 control-label" for="Gender">Gender</label>
+        <label class="col-md-4 control-label" for="Gender">Giới tính</label>
         <div class="col-md-6">
           <label class="radio-inline" for="Gender-0">
-            <input type="radio" name="Gender" id="Gender-0" value="1" checked="checked">
-            Male
+            <input type="radio" name="Gender" id="Gender-0" checked="{{this.data.gender == 0?'checked':''}}"
+              (click)="this.handleClick(0)">
+            Nam
           </label>
           <label class="radio-inline" for="Gender-1">
-            <input type="radio" name="Gender" id="Gender-1" value="2">
-            Female
-          </label>
-          <label class="radio-inline" for="Gender-2">
-            <input type="radio" name="Gender" id="Gender-2" value="3">
-            Other
+            <input type="radio" name="Gender" id="Gender-1" checked="{{this.data.gender == 1?'checked':''}}"
+              (click)="this.handleClick(1)">
+            Nữ
           </label>
         </div>
       </div>
@@ -76,7 +78,8 @@
               </svg>
 
             </div>
-            <input id="adress" name="Date Of Birth" type="text" placeholder="Địa chỉ" class="form-control input-md">
+            <input id="adress" name="Date Of Birth" type="text" placeholder="Địa chỉ" class="form-control input-md"
+              [(ngModel)]="this.data.address">
           </div>
         </div>
       </div>
@@ -91,7 +94,7 @@
 
             </div>
             <input id="Phone number " name="Phone number " type="text" placeholder="Primary Phone number "
-              class="form-control input-md">
+              [(ngModel)]="this.data.phone" class="form-control input-md">
 
           </div>
           <div class="input-group othertop">
@@ -117,7 +120,7 @@
 
             </div>
             <input id="Email Address" name="Email Address" type="text" placeholder="Email Address"
-              class="form-control input-md">
+              [(ngModel)]="this.data.email" class="form-control input-md">
 
           </div>
 
@@ -187,11 +190,15 @@
       <div class="form-group row">
         <label class="col-md-4 control-label"></label>
         <div class="col-md-6">
-          <a role = "button" (click) = "sumitData()" class="btn btn-success"><span class="glyphicon glyphicon-thumbs-up"></span> Submit</a>
-          <a href="#" class="btn btn-danger" value=""><span class="glyphicon glyphicon-remove-sign"></span> Clear</a>
+          <button type="button" (click)="this.hasDataChange()" class="btn btn-success">Success</button>
+          <button type="button" class="btn btn-danger" (click)="this.revertData()">Revert</button>
+          <!-- <a role="button" (click)="sumitData()" class="btn btn-success"><span
+              class="glyphicon glyphicon-thumbs-up"></span> Submit</a>
+          <a href="#" class="btn btn-danger" value=""><span class="glyphicon glyphicon-remove-sign"></span> Clear</a> -->
         </div>
       </div>
 
+      <p class="text-danger" *ngIf="!this.haschange"> Không có sự thay đổi nào</p>
 
     </div>
 
